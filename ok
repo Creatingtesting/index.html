@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Roblox Redirect</title>
+    <script>
+      window.onload = function () {
+        const params = new URLSearchParams(window.location.search);
+        const placeId = params.get("placeId");
+        const gameInstanceId = params.get("gameInstanceId");
+
+        if (placeId && gameInstanceId) {
+          const joinURL = `roblox://experiences/start?placeId=${placeId}&gameInstanceId=${gameInstanceId}`;
+          window.location.href = joinURL;
+        } else {
+          document.body.innerHTML = "<h2>Missing placeId or gameInstanceId!</h2>";
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <p>Redirecting to Roblox...</p>
+  </body>
+</html>
