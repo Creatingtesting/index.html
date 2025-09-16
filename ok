@@ -2,28 +2,26 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Roblox Redirect</title>
+    <title>Roblox Joiner</title>
     <script>
       window.onload = function () {
-        try {
-          const params = new URLSearchParams(window.location.search);
-          const placeId = params.get("placeId");
-          const gameInstanceId = params.get("gameInstanceId");
+        const params = new URLSearchParams(window.location.search);
+        const placeId = params.get("placeId");
+        const gameInstanceId = params.get("gameInstanceId");
 
-          if (placeId && gameInstanceId) {
-            // Roblox deep link format
-            const joinURL = `roblox://experiences/start?placeId=${encodeURIComponent(placeId)}&gameInstanceId=${encodeURIComponent(gameInstanceId)}`;
-            
-            // Attempt redirect
-            window.location.href = joinURL;
+        if (placeId && gameInstanceId) {
+          const joinURL = `roblox://experiences/start?placeId=${encodeURIComponent(placeId)}&gameInstanceId=${encodeURIComponent(gameInstanceId)}`;
+          
+          // Try to redirect immediately
+          window.location.href = joinURL;
 
-            // As fallback, show clickable link
-            document.body.innerHTML = `<p>If Roblox does not open, <a href="${joinURL}">click here to join</a>.</p>`;
-          } else {
-            document.body.innerHTML = "<h2>Missing placeId or gameInstanceId!</h2>";
-          }
-        } catch (err) {
-          document.body.innerHTML = "<h2>Error: " + err.message + "</h2>";
+          // Fallback clickable link
+          document.body.innerHTML = `
+            <h2>Opening Roblox...</h2>
+            <p>If Roblox doesn’t open, <a href="${joinURL}">click here</a>.</p>
+          `;
+        } else {
+          document.body.innerHTML = "<h2>Missing placeId or gameInstanceId!</h2>";
         }
       };
     </script>
